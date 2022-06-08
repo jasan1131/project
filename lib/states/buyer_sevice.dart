@@ -32,6 +32,13 @@ class _BuyerServiceState extends State<BuyerService> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () =>
+                Navigator.pushNamed(context, MyConstant.rounteShowCart),
+            icon: Icon(Icons.shopping_cart_outlined),
+          ),
+        ],
         centerTitle: true,
         title: Text('Buyer'),
       ),

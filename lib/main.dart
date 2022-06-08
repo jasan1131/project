@@ -6,6 +6,7 @@ import 'package:flutter_myappication_1/states/buyer_sevice.dart';
 import 'package:flutter_myappication_1/states/create_account.dart';
 import 'package:flutter_myappication_1/states/edit_profile_admin.dart';
 import 'package:flutter_myappication_1/states/rider_service.dart';
+import 'package:flutter_myappication_1/states/show_cart.dart';
 import 'package:flutter_myappication_1/type/type_numcom.dart';
 import 'package:flutter_myappication_1/type/type_numpar.dart';
 import 'package:flutter_myappication_1/utility/my_constant.dart';
@@ -21,6 +22,7 @@ final Map<String, WidgetBuilder> map = {
   '/editProfileAdmin': (BuildContext context) => EditProfileAdmin(),
   '/typenumpar' : (BuildContext context) => TypeNumPar(),
   '/typenumcom' :(BuildContext context) => TypeNumCom(),
+  '/showcart' :(BuildContext context) => ShowCart(),
 };
 
 String? initlalRoute;

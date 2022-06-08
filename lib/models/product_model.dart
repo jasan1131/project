@@ -6,7 +6,6 @@ class ProductModel {
   final String idproduct;
   final String nameproduct;
   final String typeproduct;
-  final String numberproduct;
   final String priceproduct;
   final String productdetail;
   final String Images;
@@ -15,7 +14,6 @@ class ProductModel {
     required this.idproduct,
     required this.nameproduct,
     required this.typeproduct,
-    required this.numberproduct,
     required this.priceproduct,
     required this.productdetail,
     required this.Images,
@@ -26,7 +24,6 @@ class ProductModel {
     String? idproduct,
     String? nameproduct,
     String? typeproduct,
-    String? numberproduct,
     String? priceproduct,
     String? productdetail,
     String? Images,
@@ -36,7 +33,6 @@ class ProductModel {
       idproduct: idproduct ?? this.idproduct,
       nameproduct: nameproduct ?? this.nameproduct,
       typeproduct: typeproduct ?? this.typeproduct,
-      numberproduct: numberproduct ?? this.numberproduct,
       priceproduct: priceproduct ?? this.priceproduct,
       productdetail: productdetail ?? this.productdetail,
       Images: Images ?? this.Images,
@@ -49,7 +45,6 @@ class ProductModel {
       'idproduct': idproduct,
       'nameproduct': nameproduct,
       'typeproduct': typeproduct,
-      'numberproduct': numberproduct,
       'priceproduct': priceproduct,
       'productdetail': productdetail,
       'Images': Images,
@@ -62,7 +57,6 @@ class ProductModel {
       idproduct: map['idproduct'] as String,
       nameproduct: map['nameproduct'] as String,
       typeproduct: map['typeproduct'] as String,
-      numberproduct: map['numberproduct'] as String,
       priceproduct: map['priceproduct'] as String,
       productdetail: map['productdetail'] as String,
       Images: map['Images'] as String,
@@ -75,7 +69,7 @@ class ProductModel {
 
   @override
   String toString() {
-    return 'ProductModel(id: $id, idproduct: $idproduct, nameproduct: $nameproduct, typeproduct: $typeproduct, numberproduct: $numberproduct, priceproduct: $priceproduct, productdetail: $productdetail, Images: $Images)';
+    return 'ProductModel(id: $id, idproduct: $idproduct, nameproduct: $nameproduct, typeproduct: $typeproduct, priceproduct: $priceproduct, productdetail: $productdetail, Images: $Images)';
   }
 
   @override
@@ -87,7 +81,6 @@ class ProductModel {
       other.idproduct == idproduct &&
       other.nameproduct == nameproduct &&
       other.typeproduct == typeproduct &&
-      other.numberproduct == numberproduct &&
       other.priceproduct == priceproduct &&
       other.productdetail == productdetail &&
       other.Images == Images;
@@ -99,7 +92,6 @@ class ProductModel {
       idproduct.hashCode ^
       nameproduct.hashCode ^
       typeproduct.hashCode ^
-      numberproduct.hashCode ^
       priceproduct.hashCode ^
       productdetail.hashCode ^
       Images.hashCode;

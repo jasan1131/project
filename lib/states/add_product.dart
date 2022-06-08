@@ -25,7 +25,6 @@ class _AddProductState extends State<AddProduct> {
 
   TextEditingController NameProductController = TextEditingController();
   // TextEditingController TypeProductController = TextEditingController();
-  TextEditingController NumberProductController = TextEditingController();
   TextEditingController PriceProductController = TextEditingController();
   TextEditingController DetailProductController = TextEditingController();
 
@@ -74,7 +73,6 @@ class _AddProductState extends State<AddProduct> {
                     buildTitle('ชนิดของสินค้า'),
                     buildProductGlass(size),
                     buildProductPlastic(size),
-                    buildProductNumber(constraints),
                     buildProductPrice(constraints),
                     buildProductDetail(constraints),
                     buildImage(constraints),
@@ -143,7 +141,6 @@ class _AddProductState extends State<AddProduct> {
               String idproduct = preference.getString('id')!;
               String nameproduct = NameProductController.text;
               // String typeproduct = TypeProductController.text;
-              String numberproduct = NumberProductController.text;
               String priceproduct = PriceProductController.text;
               String productdetail = DetailProductController.text;
               String Images = paths.toString();
@@ -153,7 +150,7 @@ class _AddProductState extends State<AddProduct> {
               // print('### image ==> $Image');
 
               String path =
-                  '${MyConstant.domain}/shopping/insertProduct.php?isAdd=true&idproduct=$idproduct&nameproduct=$nameproduct&typeproduct=$typeproduct&numberproduct=$numberproduct&priceproduct=$priceproduct&productdetail=$productdetail&Images=$Images';
+                  '${MyConstant.domain}/shopping/insertProduct.php?isAdd=true&idproduct=$idproduct&nameproduct=$nameproduct&typeproduct=$typeproduct&priceproduct=$priceproduct&productdetail=$productdetail&Images=$Images';
 
               await Dio().get(path).then((value) => Navigator.pop(context));
 
@@ -311,45 +308,6 @@ class _AddProductState extends State<AddProduct> {
         },
         decoration: InputDecoration(
           hintText: 'ชื่อสินค้า :',
-          hintStyle: MyConstant().h3Style(),
-          prefixIcon: Icon(
-            Icons.production_quantity_limits_outlined,
-            color: MyConstant.dark,
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: MyConstant.dark,
-            ),
-            borderRadius: BorderRadius.circular(15),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: MyConstant.lighr),
-            borderRadius: BorderRadius.circular(15),
-          ),
-          errorBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.red),
-            borderRadius: BorderRadius.circular(15),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget buildProductNumber(BoxConstraints constraints) {
-    return Container(
-      width: constraints.maxWidth * 0.75,
-      margin: EdgeInsets.only(top: 16),
-      child: TextFormField(
-        controller: NumberProductController,
-        validator: (value) {
-          if (value!.isEmpty) {
-            return 'กรุณากรอกชื่อสินค้าในช่องว่างด้วย';
-          } else {
-            return null;
-          }
-        },keyboardType: TextInputType.phone,
-        decoration: InputDecoration(
-          hintText: 'จำนวนสินค้า :',
           hintStyle: MyConstant().h3Style(),
           prefixIcon: Icon(
             Icons.production_quantity_limits_outlined,

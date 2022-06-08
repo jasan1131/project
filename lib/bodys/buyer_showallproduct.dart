@@ -4,8 +4,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_myappication_1/models/product_model.dart';
+import 'package:flutter_myappication_1/models/splite_model.dart';
 import 'package:flutter_myappication_1/models/user_models.dart';
 import 'package:flutter_myappication_1/utility/my_constant.dart';
+import 'package:flutter_myappication_1/utility/sqlite_helpper.dart';
 import 'package:flutter_myappication_1/widgets/show_image.dart';
 import 'package:flutter_myappication_1/widgets/show_progress.dart';
 import 'package:flutter_myappication_1/widgets/show_title.dart';
@@ -71,20 +73,22 @@ class _BuyerShowAllProductState extends State<BuyerShowAllProduct> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: load
-            ? ShowProgress()
-            : haveData!
-                ? listProduct()
-                : Center(
-                child: Column(mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ShowTitle(
+      body: load
+          ? ShowProgress()
+          : haveData!
+              ? listProduct()
+              : Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ShowTitle(
                         title: 'NO DATA',
                         textStyle: MyConstant().h1Style(),
                       ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),);
+    );
   }
 
   LayoutBuilder listProduct() {
@@ -99,56 +103,55 @@ class _BuyerShowAllProductState extends State<BuyerShowAllProduct> {
               listImages[index],
             );
           },
-          child: Card(
-            child: Row(
-              children: [
-                Container(
-                  width: constraints.maxWidth * 0.5 - 8,
-                  height: constraints.maxWidth * 0.5,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: CachedNetworkImage(
-                      fit: BoxFit.fill,
-                      imageUrl: findUrlImage(productmodels[index].Images),
-                      placeholder: (context, url) => ShowProgress(),
-                      errorWidget: (context, url, error) =>
-                          ShowImage(path: MyConstant.imageeror),
+          child: Row(
+            children: [
+              Card(
+                child: Column(
+                  children: [
+                    Container(
+                      width: constraints.maxWidth * 0.5 - 8,
+                      height: constraints.maxWidth * 0.5,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: CachedNetworkImage(
+                          fit: BoxFit.fill,
+                          imageUrl: findUrlImage(productmodels[index].Images),
+                          placeholder: (context, url) => ShowProgress(),
+                          errorWidget: (context, url, error) =>
+                              ShowImage(path: MyConstant.imageeror),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                Container(
-                  width: constraints.maxWidth * 0.5,
-                  height: constraints.maxWidth * 0.5,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ShowTitle(
-                          title: productmodels[index].nameproduct,
-                          textStyle: MyConstant().h2Style(),
+                    Container(
+                      width: constraints.maxWidth * 0.5,
+                      height: constraints.maxWidth * 0.5,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ShowTitle(
+                              title: productmodels[index].nameproduct,
+                              textStyle: MyConstant().h2Style(),
+                            ),
+                            ShowTitle(
+                              title:
+                                  'ราคา : ${productmodels[index].priceproduct} บาท',
+                              textStyle: MyConstant().h3Style(),
+                            ),
+                            ShowTitle(
+                              title: cutWord(
+                                  'รายระเอียดสินค้า : ${productmodels[index].productdetail}'),
+                              textStyle: MyConstant().h3Style(),
+                            ),
+                          ],
                         ),
-                        ShowTitle(
-                          title:
-                              'ราคา : ${productmodels[index].priceproduct} บาท',
-                          textStyle: MyConstant().h3Style(),
-                        ),
-                        ShowTitle(
-                          title:
-                              'จำนวนสินค้า : ${productmodels[index].numberproduct}',
-                          textStyle: MyConstant().h3Style(),
-                        ),
-                        ShowTitle(
-                          title: cutWord(
-                              'รายระเอียดสินค้า : ${productmodels[index].productdetail}'),
-                          textStyle: MyConstant().h3Style(),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
@@ -254,13 +257,6 @@ class _BuyerShowAllProductState extends State<BuyerShowAllProduct> {
                     ),
                   ],
                 ),
-                Row(
-                  children: [
-                    ShowTitle(
-                        title: 'จำนวลสินค้า : ${productmodel.numberproduct}',
-                        textStyle: MyConstant().h3Style()),
-                  ],
-                ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
@@ -316,7 +312,29 @@ class _BuyerShowAllProductState extends State<BuyerShowAllProduct> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 TextButton(
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: () async {
+                    String idProduct = productmodel.id;
+                    String nameProduct = productmodel.nameproduct;
+                    String priceProduct = productmodel.priceproduct;
+                    String amount = amountInt.toString();
+                    int sumInt = int.parse(priceProduct) * amountInt;
+                    String sum = sumInt.toString();
+
+                    print(
+                        '### idSeller ==>> $idProduct, name ==>> $nameProduct, price ==>> $priceProduct, amount ==>> $amount, sum = $sum');
+                    SQLiteModel sqLiteModel = SQLiteModel(
+                        idProduct: idProduct,
+                        nameProduct: nameProduct,
+                        priceProduct: priceProduct,
+                        amount: amount,
+                        sum: sum);
+                    await SQLiteHelpper().insertValueSQLite(sqLiteModel).then(
+                      (value) {
+                        amountInt = 1;
+                        Navigator.pop(context);
+                      },
+                    );
+                  },
                   child: ShowTitle(
                     title: 'Add',
                     textStyle: MyConstant().h2BlueStyle(),

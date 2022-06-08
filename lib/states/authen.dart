@@ -256,7 +256,7 @@ class _AuthenState extends State<Authen> {
       children: [
         Container(
           width: size * 0.9,
-          child: ShowImage(path: MyConstant.logofood),
+          child: ShowImage(path: MyConstant.image1),
         ),
       ],
     );

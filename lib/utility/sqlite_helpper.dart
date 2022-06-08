@@ -1,3 +1,4 @@
+import 'package:flutter_myappication_1/models/splite_model.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -13,10 +14,10 @@ class SQLiteHelpper {
   final String columSum = 'sum';
 
   SQLiteHelpper() {
-    initislDatabase();
+    initialDatabase();
   }
 
-  Future<Null> initislDatabase() async {
+  Future<Null> initialDatabase() async {
     await openDatabase(
       join(await getDatabasesPath(), nameDetabase),
       onCreate: (db, version) => db.execute(
@@ -31,6 +32,23 @@ class SQLiteHelpper {
     );
   }
 
-  
+  Future<List<SQLiteModel>> readSQLite() async {
+    Database database = await connectedDatabase();
+    List<SQLiteModel> results = [];
+    List<Map<String, dynamic>> maps = await database.query(tableDatabase);
+    print('### maps on SQLiteHelper ==>> $maps');
+    for (var item in maps) {
+      SQLiteModel model = SQLiteModel.fromMap(item);
+      results.add(model);
+    }
+    return results;
+  }
 
+  Future<Null> insertValueSQLite(SQLiteModel sqLiteModel) async {
+    Database database = await connectedDatabase();
+    await database.insert(tableDatabase, sqLiteModel.toMap()).then(
+          (value) =>
+              print('### insert Value name ==>> ${sqLiteModel.nameProduct}'),
+        );
+  }
 }

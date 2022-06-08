@@ -153,11 +153,6 @@ class _ShowProductAdminState extends State<ShowProductAdmin> {
                   ),
                   ShowTitle(
                     title:
-                        'จำนวนสินค้า : ${productModels[index].numberproduct}',
-                    textStyle: MyConstant().h3Style(),
-                  ),
-                  ShowTitle(
-                    title:
                         'รายละเอียดสินค้า : ${productModels[index].productdetail}',
                     textStyle: MyConstant().h3Style(),
                   ),

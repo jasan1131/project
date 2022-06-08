@@ -4,7 +4,7 @@ class MyConstant {
   // Genernal
   static String appName = 'Shopping MAll';
   static String domain =
-      'https://36ab-2001-fb1-1c-8c75-49e0-4a96-24fa-a7bd.ap.ngrok.io';
+      'https://f62c-2001-fb1-1d-3eec-4f-1201-ed30-6588.ap.ngrok.io';
 
   // Route
   static String routeAdminSever = '/admin';
@@ -16,6 +16,7 @@ class MyConstant {
   static String rounteEditProfileAdmin = '/editProfileAdmin';
   static String rounteTypeNumPar = '/typenumpar';
   static String rounteTypeNumCom = '/typenumcom';
+  static String rounteShowCart = '/showcart';
 
   // Image
   static String image1 = 'images/image1.png';
@@ -25,7 +26,7 @@ class MyConstant {
   static String imageeror = 'images/eror.png';
   static String avatar = 'images/avatar.png';
   static String product = 'images/product.png';
-  static String logofood = 'images/logofood';
+  static String logofood = 'images/logofood.png';
   // color
   static Color primary = Color(0xff64b5f6);
   static Color dark = Color(0xff2286c3);

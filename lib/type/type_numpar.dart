@@ -141,11 +141,6 @@ class _TypeNumParState extends State<TypeNumPar> {
                           textStyle: MyConstant().h3Style(),
                         ),
                         ShowTitle(
-                          title:
-                              'จำนวนสินค้า : ${productmodels[index].numberproduct}',
-                          textStyle: MyConstant().h3Style(),
-                        ),
-                        ShowTitle(
                           title: cutWord(
                               'รายระเอียดสินค้า : ${productmodels[index].productdetail}'),
                           textStyle: MyConstant().h3Style(),
@@ -259,13 +254,6 @@ class _TypeNumParState extends State<TypeNumPar> {
                       title: 'รายระเอียดสินค้า :',
                       textStyle: MyConstant().h2Style(),
                     ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    ShowTitle(
-                        title: 'จำนวลสินค้า : ${productmodel.numberproduct}',
-                        textStyle: MyConstant().h3Style()),
                   ],
                 ),
                 Padding(
