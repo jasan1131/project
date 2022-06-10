@@ -41,66 +41,68 @@ class _ShowCartState extends State<ShowCart> {
       ),
       body: load
           ? ShowProgress()
-          : Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ShowTitle(
-                    title: 'รายการสินค้าที่สั่ง',
-                    textStyle: MyConstant().h1Style(),
+          : SingleChildScrollView(
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ShowTitle(
+                      title: 'รายการสินค้าที่สั่ง',
+                      textStyle: MyConstant().h1Style(),
+                    ),
                   ),
-                ),
-                buildHead(),
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: ScrollPhysics(),
-                  itemCount: sqliteModels.length,
-                  itemBuilder: (context, index) => Row(
-                    children: [
-                      Expanded(
-                        flex: 2,
-                        child: ShowTitle(
-                          title: sqliteModels[index].nameProduct,
-                          textStyle: MyConstant().h3Style(),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: ShowTitle(
-                          title: sqliteModels[index].priceProduct,
-                          textStyle: MyConstant().h3Style(),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: ShowTitle(
-                          title: sqliteModels[index].amount,
-                          textStyle: MyConstant().h3Style(),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: ShowTitle(
-                          title: sqliteModels[index].sum,
-                          textStyle: MyConstant().h3Style(),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.delete_forever_outlined,
-                            color: Colors.red.shade800,
+                  buildHead(),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: ScrollPhysics(),
+                    itemCount: sqliteModels.length,
+                    itemBuilder: (context, index) => Row(
+                      children: [
+                        Expanded(
+                          flex: 2,
+                          child: ShowTitle(
+                            title: sqliteModels[index].nameProduct,
+                            textStyle: MyConstant().h3Style(),
                           ),
                         ),
-                      ),
-                    ],
+                        Expanded(
+                          flex: 1,
+                          child: ShowTitle(
+                            title: sqliteModels[index].priceProduct,
+                            textStyle: MyConstant().h3Style(),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: ShowTitle(
+                            title: sqliteModels[index].amount,
+                            textStyle: MyConstant().h3Style(),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: ShowTitle(
+                            title: sqliteModels[index].sum,
+                            textStyle: MyConstant().h3Style(),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.delete_forever_outlined,
+                              color: Colors.red.shade800,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
+                ],
+              ),
+          ),
     );
   }
 

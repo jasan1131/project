@@ -4,7 +4,7 @@ class MyConstant {
   // Genernal
   static String appName = 'Shopping MAll';
   static String domain =
-      'https://81c7-2001-fb1-1d-3eec-4f-1201-ed30-6588.ap.ngrok.io';
+      'https://892d-2001-fb1-1e-32c4-e831-22f1-db9d-d61c.ap.ngrok.io';
 
   // Route
   static String routeAdminSever = '/admin';

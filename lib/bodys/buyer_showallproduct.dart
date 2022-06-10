@@ -118,7 +118,9 @@ class _BuyerShowAllProductState extends State<BuyerShowAllProduct> {
       child: GridView.builder(
         itemCount: productmodels.length,
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            childAspectRatio: 2 / 4, maxCrossAxisExtent: 200),
+          childAspectRatio: 2 / 4,
+          maxCrossAxisExtent: 260,
+        ),
         itemBuilder: (context, index) => GestureDetector(
           onTap: () {
             // print('### YOu Click Index ===>> $index');
@@ -127,55 +129,61 @@ class _BuyerShowAllProductState extends State<BuyerShowAllProduct> {
               listImages[index],
             );
           },
-          child: Row(
-            children: [
-              Card(
-                child: Column(
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.47 - 4,
-                      height: MediaQuery.of(context).size.height * 0.47,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: CachedNetworkImage(
-                          fit: BoxFit.fill,
-                          imageUrl: findUrlImage(productmodels[index].Images),
-                          placeholder: (context, url) => ShowProgress(),
-                          errorWidget: (context, url, error) =>
-                              ShowImage(path: MyConstant.imageeror),
-                        ),
+          child: Card(
+            shape: RoundedRectangleBorder(
+              side: BorderSide(color: MyConstant.dark),
+              borderRadius: BorderRadius.circular(16),
+            ),
+            shadowColor: MyConstant.dark,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: MyConstant.dark),
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    width: MediaQuery.of(context).size.width * 0.4 - 8,
+                    height: MediaQuery.of(context).size.height * 0.22,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      child: CachedNetworkImage(
+                        fit: BoxFit.fill,
+                        imageUrl: findUrlImage(productmodels[index].Images),
+                        placeholder: (context, url) => ShowProgress(),
+                        errorWidget: (context, url, error) =>
+                            ShowImage(path: MyConstant.imageeror),
                       ),
                     ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.47,
-                      height: MediaQuery.of(context).size.height * 0.47,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ShowTitle(
-                              title: productmodels[index].nameproduct,
-                              textStyle: MyConstant().h2Style(),
-                            ),
-                            ShowTitle(
-                              title:
-                                  'ราคา : ${productmodels[index].priceproduct} บาท',
-                              textStyle: MyConstant().h3Style(),
-                            ),
-                            ShowTitle(
-                              title: cutWord(
-                                  'รายระเอียดสินค้า : ${productmodels[index].productdetail}'),
-                              textStyle: MyConstant().h3Style(),
-                            ),
-                          ],
-                        ),
+                  ),
+                  Container(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ShowTitle(
+                            title: productmodels[index].nameproduct,
+                            textStyle: MyConstant().h2Style(),
+                          ),
+                          ShowTitle(
+                            title:
+                                'ราคา : ${productmodels[index].priceproduct} บาท',
+                            textStyle: MyConstant().h3Style(),
+                          ),
+                          ShowTitle(
+                            title: cutWord(
+                                'รายระเอียดสินค้า : ${productmodels[index].productdetail}'),
+                            textStyle: MyConstant().h3Style(),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),
@@ -187,7 +195,9 @@ class _BuyerShowAllProductState extends State<BuyerShowAllProduct> {
       child: GridView.builder(
         itemCount: productmodels.length,
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            childAspectRatio: 2 / 4, maxCrossAxisExtent: 400),
+          childAspectRatio: 2 / 2,
+          maxCrossAxisExtent: 400,
+        ),
         itemBuilder: (context, index) => GestureDetector(
           onTap: () {
             // print('### YOu Click Index ===>> $index');
@@ -196,55 +206,61 @@ class _BuyerShowAllProductState extends State<BuyerShowAllProduct> {
               listImages[index],
             );
           },
-          child: Row(
-            children: [
-              Card(
-                child: Column(
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.45 - 4,
-                      height: MediaQuery.of(context).size.height * 0.45,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: CachedNetworkImage(
-                          fit: BoxFit.fill,
-                          imageUrl: findUrlImage(productmodels[index].Images),
-                          placeholder: (context, url) => ShowProgress(),
-                          errorWidget: (context, url, error) =>
-                              ShowImage(path: MyConstant.imageeror),
-                        ),
+          child: Card(
+            shape: RoundedRectangleBorder(
+              side: BorderSide(color: MyConstant.dark),
+              borderRadius: BorderRadius.circular(16),
+            ),
+            shadowColor: MyConstant.dark,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: MyConstant.dark),
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    width: MediaQuery.of(context).size.width * 0.3 - 8,
+                    height: MediaQuery.of(context).size.height * 0.55,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      child: CachedNetworkImage(
+                        fit: BoxFit.fill,
+                        imageUrl: findUrlImage(productmodels[index].Images),
+                        placeholder: (context, url) => ShowProgress(),
+                        errorWidget: (context, url, error) =>
+                            ShowImage(path: MyConstant.imageeror),
                       ),
                     ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.45,
-                      height: MediaQuery.of(context).size.height * 0.45,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ShowTitle(
-                              title: productmodels[index].nameproduct,
-                              textStyle: MyConstant().h2Style(),
-                            ),
-                            ShowTitle(
-                              title:
-                                  'ราคา : ${productmodels[index].priceproduct} บาท',
-                              textStyle: MyConstant().h3Style(),
-                            ),
-                            ShowTitle(
-                              title: cutWord(
-                                  'รายระเอียดสินค้า : ${productmodels[index].productdetail}'),
-                              textStyle: MyConstant().h3Style(),
-                            ),
-                          ],
-                        ),
+                  ),
+                  Container(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ShowTitle(
+                            title: productmodels[index].nameproduct,
+                            textStyle: MyConstant().h2Style(),
+                          ),
+                          ShowTitle(
+                            title:
+                                'ราคา : ${productmodels[index].priceproduct} บาท',
+                            textStyle: MyConstant().h3Style(),
+                          ),
+                          ShowTitle(
+                            title: cutWord(
+                                'รายระเอียดสินค้า : ${productmodels[index].productdetail}'),
+                            textStyle: MyConstant().h3Style(),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),
