@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_myappication_1/models/splite_model.dart';
 import 'package:flutter_myappication_1/utility/my_constant.dart';
 import 'package:flutter_myappication_1/utility/sqlite_helpper.dart';
+import 'package:flutter_myappication_1/widgets/show_image.dart';
 import 'package:flutter_myappication_1/widgets/show_progress.dart';
 import 'package:flutter_myappication_1/widgets/show_title.dart';
 
@@ -16,7 +17,7 @@ class _ShowCartState extends State<ShowCart> {
   List<SQLiteModel> sqliteModels = [];
   bool load = true;
   int? total;
-  
+
   @override
   void initState() {
     // TODO: implement initState
@@ -58,29 +59,101 @@ class _ShowCartState extends State<ShowCart> {
       ),
       body: load
           ? ShowProgress()
-          : SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ShowTitle(
-                          title: 'รายการสินค้าที่สั่ง',
-                          textStyle: MyConstant().h1Style(),
-                        ),
-                      ),
-                    ],
-                  ),
-                  buildHead(),
-                  listProductOrder(),
-                  buildDivider(),
-                  buildTotal(),
-                ],
+          : sqliteModels.isEmpty
+              ? Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Center(
+                      child: ShowTitle(
+                          title: 'ไม่มีสินค้า',
+                          textStyle: MyConstant().h1Style()),
+                    ),
+                  ],
+                )
+              : buildContent(),
+    );
+  }
+
+  SingleChildScrollView buildContent() {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ShowTitle(
+                  title: 'รายการสินค้าที่สั่ง',
+                  textStyle: MyConstant().h1Style(),
+                ),
               ),
-            ),
+            ],
+          ),
+          buildHead(),
+          listProductOrder(),
+          buildDivider(),
+          buildTotal(),
+          buildDivider(),
+          buttonController(),
+        ],
+      ),
+    );
+  }
+
+  Future<void> confirmEmptyCart() async {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: ListTile(
+          leading: ShowImage(path: MyConstant.imageeror),
+          title: ShowTitle(
+            title: 'คุณต้องการจะ ลบ ?',
+            textStyle: MyConstant().h2Style(),
+          ),
+          subtitle: ShowTitle(
+            title: 'สินค้า ทั้งหมด ในตะกร้า',
+            textStyle: MyConstant().h3Style(),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () async {
+              
+              await SQLiteHelpper().emptySQLite().then((value) {
+                Navigator.pop(context);
+                processReadSQLite();
+              });
+
+            },
+            child: Text('Delete'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text('Cancel'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Row buttonController() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        ElevatedButton(
+          onPressed: () {},
+          child: Text('Order'),
+        ),
+        Container(
+          margin: EdgeInsets.only(left: 4, right: 8),
+          child: ElevatedButton(
+            onPressed: () => confirmEmptyCart(),
+            child: Text('Empty'),
+          ),
+        ),
+      ],
     );
   }
 
